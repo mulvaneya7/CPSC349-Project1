@@ -9,10 +9,10 @@
   </head>
   <body>
     <!-- NAVBAR -->
-    <?php  $page='home';include 'components/navbar.php'; ?>
+    <?php  $page='library';include 'components/navbar.php'; ?>
     <!-- END NAVBAR -->
 
-    <h1>Hello, world!</h1>
+    <h1>Welcome to your Library!</h1>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
