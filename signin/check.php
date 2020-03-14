@@ -21,7 +21,7 @@ if($row==0){
 
 }else{
     
-    header('location:main.html');
+    header('location:../index.php');
 }
 $db->close();
 ?>
