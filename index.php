@@ -23,12 +23,18 @@
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-warning">Go somewhere</a>
+                  <p><a href="#" class="btn btn-warning">+</a>  add to library</p>
                 </div>
             </div>
           <!-- FA Arrow right -->
           <i class="fas fa-angle-double-right fa-3x"></i>
         </div>
+      </div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid mt-4">
+      <div class="container">
+
       </div>
     </div>
     
