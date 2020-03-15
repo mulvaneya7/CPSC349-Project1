@@ -12,6 +12,25 @@
     <?php  $page='home';include 'components/navbar.php'; ?>
     <!-- Header -->
     <?php include 'components/header.php'; ?>
+
+    <div class="container">
+      <div class ="row justify-content-center align-items-center">
+        <!-- FA Arrow left -->
+        <i class="fas fa-angle-double-left fa-3x"></i>
+          <!-- Card Component -->
+            <div class="card border-warning" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="btn btn-warning">Go somewhere</a>
+                </div>
+            </div>
+          <!-- FA Arrow right -->
+          <i class="fas fa-angle-double-right fa-3x"></i>
+        </div>
+      </div>
+    </div>
     
 
     <!-- Optional JavaScript -->
