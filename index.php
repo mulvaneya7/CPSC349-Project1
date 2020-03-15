@@ -10,9 +10,9 @@
   <body>
     <!-- NAVBAR -->
     <?php  $page='home';include 'components/navbar.php'; ?>
-    <!-- END NAVBAR -->
-
-    <h1>Hello, world!</h1>
+    <!-- Header -->
+    <?php include 'components/header.php'; ?>
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
