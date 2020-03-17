@@ -12,14 +12,9 @@
     <?php  $page='home';include 'components/navbar.php'; ?>
     <!-- Header -->
     <?php include 'components/header.php'; ?>
-
-    <!-- load cards from database -->
-    <?php
-        $db = mysqli_connect("localhost", "root", "", "Food");
-        $sql = "SELECT * FROM recipe_cards";
-        $result = mysqli_query($db, $sql);
-    ?>
-
+    <!-- Display Card  -->
+    <?php include 'displaycard.php'; ?>
+    
     <div class="container">
       <div class ="row justify-content-center align-items-center">
         <!-- FA Arrow left -->
