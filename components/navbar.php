@@ -11,6 +11,9 @@
             <li class="nav-item">
               <a class="nav-link <?php if($page=='library'){echo 'active';}?>" href="library.php">Library</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link <?php if($page=='submitPage'){echo 'active';}?>" href="submit.php">Submit</a>  
+            </li>
           </ul>
         </div>
       </nav>
