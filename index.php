@@ -15,26 +15,53 @@
 
     <!-- load cards from database -->
     <?php
+    $userId = $_SESSION["UserId"];
         $db = mysqli_connect("localhost", "root", "", "Food");
-        $sql = "SELECT * FROM recipe_cards";
+        $sql = "SELECT * FROM recipe_cards AS R
+                LEFT JOIN library AS L 
+                ON R.id = L.Recipe_Id AND L.User_Id = '$userId'
+                WHERE  L.Recipe_Id IS NULL";
+                //AND L.User_Id = '$userId'
         $result = mysqli_query($db, $sql);
+       $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+       print_r($row);
+      echo "user id: ".$_SESSION["UserId"];
+
     ?>
 
-    <div class="container">
+    <div class="container" id="container">
       <div class ="row justify-content-center align-items-center">
         <!-- FA Arrow left -->
-        <i class="fas fa-angle-double-left fa-3x"></i>
+        <a href="#" id = "dec" name="dec"><i class="fas fa-angle-double-left fa-3x"></i></a>
           <!-- Card Component -->
             <div class="card border-warning" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+            <img src="images/<?php echo $row[0]['image']; ?>" class="card-img-top" alt="..." id ="img">
                 <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <p><a href="#" class="btn btn-warning">+</a>  add to library</p>
+                <h5 class="card-title" id = "title"><?php echo $row[0]['title']; ?></h5>
+                <p class="card-text" id ="text"><?php echo $row[0]['recipe_text'];?></p>
+                
+                <!-- <p><a href="#" id ="add" class="btn btn-warning">+</a>  add to library</p> -->
+
+
+                
+                 <!-- <p><a href="#" id ="add" class="btn btn-warning" >+</a>  add to library</p> -->
+
+                 <form method="post" action="insert_Library.php" id ='formId'>
+                 <input type="hidden" id ="myField" name="foo"  value="" />
+                 
+
+                 <p><a href="#" id ="add" class="btn btn-warning" onclick="this.form.submit()" >+</a>  add to library</p>
+               </form>
+
+
+            
+
+
                 </div>
             </div>
           <!-- FA Arrow right -->
-          <i class="fas fa-angle-double-right fa-3x"></i>
+          <a href ="#" id = "inc" name="inc"><i class="fas fa-angle-double-right fa-3x"></i></a>
+         
         </div>
       </div>
     </div>
@@ -44,12 +71,105 @@
 
       </div>
     </div>
+ 
     
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+    <script>
+      var mulArray = 
+            <?php echo json_encode($row, JSON_PRETTY_PRINT)?>;
+        var all = document.querySelectorAll("[id='container']");
+
+
+    $('#inc').click(function(){
+      var current = getIndex();
+      var incValue = current +1;
+      if(incValue == mulArray.length){
+        incValue = 0;
+      }
+      
+     all[0].querySelector("#img").src = "images/"+mulArray[incValue].image;
+     all[0].querySelector("#title").innerHTML = mulArray[incValue].title;
+     all[0].querySelector("#text").innerHTML = mulArray[incValue].recipe_text;
+    
+    });
+    $('#dec').click(function(){
+      var current = getIndex();
+
+      var decValue = current -1;
+      if(decValue < 0){
+        decValue = mulArray.length -1;
+      }
+     all[0].querySelector("#img").src = "images/"+mulArray[decValue].image;
+     all[0].querySelector("#title").innerHTML = mulArray[decValue].title;
+     all[0].querySelector("#text").innerHTML = mulArray[decValue].recipe_text;
+    });
+
+
+    function getIndex(){
+      var index;
+      for(var i =0; i<mulArray.length; i++){
+        if(all[0].querySelector("#title").innerText == mulArray[i].title){
+          return i;
+        }
+
+      }
+     
+   }
+    </script>
+    
+   <script>
+
+     var add = document.querySelector("#add");
+    //  add.addEventListener("click",()=>{insertLibrary()});
+
+
+    document.getElementById("add").onclick = function (){
+
+    var current = getIndex();
+    var recipe_id = mulArray[current].id;
+    // //alert(current);
+    document.getElementById('myField').value = recipe_id;
+    document.getElementById("formId").submit();
+
+      
+
+
+
+
+    }
+   
+
+
+
+
+
+     function insertLibrary(){
+    //    $_SESSION["UserId"]
+    document.getElementById("formId").submit();
+    var current = getIndex();
+    var recipe_id = mulArray[current].id;
+    
+    // //alert(current);
+    document.getElementById('myField').value = recipe_id;
+
+
+  
+
+  
+      }
+    
+
+   
+     </script>
+
+  
   </body>
 </html>
