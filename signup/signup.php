@@ -20,6 +20,7 @@ $stmt->execute();
 
 if($stmt->affected_rows > 0){
     echo "<p>Info inserted into the database</p>";
+    header('location:../signin/signin.php');
 }   else {
     echo "<p>An error has occurred.<br/>
         The item was not added.</p>";
