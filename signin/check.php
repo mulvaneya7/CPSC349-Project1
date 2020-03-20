@@ -13,14 +13,16 @@ if(mysqli_connect_errno()){
 }
 $query = "SELECT * FROM user WHERE Email='".$email ." ' and Password = '".$password. "'";
 $result = mysqli_query($db,$query);
+
 $row = mysqli_num_rows($result);
+$Returnvalue = mysqli_fetch_assoc($result);
 
 if($row==0){
     $_SESSION["error"] = $error;
     header('location:signin.php');
 
 }else{
-    
+    $_SESSION["UserId"] = $Returnvalue["UserId"];
     header('location:../index.php');
 }
 $db->close();

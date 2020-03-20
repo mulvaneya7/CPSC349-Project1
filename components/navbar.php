@@ -14,6 +14,9 @@
             <li class="nav-item">
               <a class="nav-link <?php if($page=='submitPage'){echo 'active';}?>" href="submit.php">Submit</a>  
             </li>
+            <li class="nav-item">
+              <a class="nav-link <?php if($page=='logout'){echo 'active';}?>" href="logout.php">Logout</a>  
+            </li>
           </ul>
         </div>
       </nav>
