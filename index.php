@@ -1,5 +1,8 @@
 <?php
     session_start();
+    if(!isset($_SESSION["loggedin"] )){
+      header('location:signin/signin.php');
+    }
 ?>
 
 <!doctype html>
@@ -16,16 +19,27 @@
     <!-- load cards from database -->
     <?php
     $userId = $_SESSION["UserId"];
-        $db = mysqli_connect("localhost", "root", "", "Food");
+    $row = array();
+    
+        $db = mysqli_connect("mariadb","cs431s15","ahShut3I","cs431s15");
+        if(mysqli_connect_errno()) {
+
+          echo"<p>Error: Could not connect to database.<br/>
+          Please try again later.</p>";
+          exit;
+      }
         $sql = "SELECT * FROM recipe_cards AS R
                 LEFT JOIN library AS L 
                 ON R.id = L.Recipe_Id AND L.User_Id = '$userId'
                 WHERE  L.Recipe_Id IS NULL";
                 //AND L.User_Id = '$userId'
         $result = mysqli_query($db, $sql);
-       $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
-       print_r($row);
-      echo "user id: ".$_SESSION["UserId"];
+      // $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+      while($resultRow = $result->fetch_assoc()){
+          $row[] = $resultRow;
+      }
+     //  print_r($row);
+     
 
     ?>
 
@@ -35,7 +49,11 @@
         <a href="#" id = "dec" name="dec"><i class="fas fa-angle-double-left fa-3x"></i></a>
           <!-- Card Component -->
             <div class="card border-warning" style="width: 18rem;">
-            <img src="images/<?php echo $row[0]['image']; ?>" class="card-img-top" alt="..." id ="img">
+            <?php  
+              
+              // echo " <img src='images/" .$row[0]['image'].";  class='card-img-top' alt='...' id ='img'>";
+            ?>
+            <img src="<?php echo $row[0]['image']; ?>" class="card-img-top" alt="..." id ="img">
                 <div class="card-body">
                 <h5 class="card-title" id = "title"><?php echo $row[0]['title']; ?></h5>
                 <p class="card-text" id ="text"><?php echo $row[0]['recipe_text'];?></p>
@@ -95,7 +113,7 @@
         incValue = 0;
       }
       
-     all[0].querySelector("#img").src = "images/"+mulArray[incValue].image;
+     all[0].querySelector("#img").src = mulArray[incValue].image;
      all[0].querySelector("#title").innerHTML = mulArray[incValue].title;
      all[0].querySelector("#text").innerHTML = mulArray[incValue].recipe_text;
     
@@ -107,7 +125,7 @@
       if(decValue < 0){
         decValue = mulArray.length -1;
       }
-     all[0].querySelector("#img").src = "images/"+mulArray[decValue].image;
+     all[0].querySelector("#img").src = mulArray[decValue].image;
      all[0].querySelector("#title").innerHTML = mulArray[decValue].title;
      all[0].querySelector("#text").innerHTML = mulArray[decValue].recipe_text;
     });
