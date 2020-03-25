@@ -2,7 +2,7 @@
 Project 1 - CSUF Web-Front end<br/>
 Team: Gregorious_Git<br/>
 Alex Mulvaney - Team Leader<br/>
-
+Geonhyeong Park<br/>
 
 
 Front end tools:
