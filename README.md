@@ -4,6 +4,7 @@ Team: Gregorious_Git<br/>
 Alex Mulvaney - Team Leader<br/>
 Geonhyeong Park<br/>
 Eric Edelman<br/>
+Samantha Yee<br/>
 
 
 Front end tools:
