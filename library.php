@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   </head>
 
   <body>
@@ -56,7 +57,12 @@
                 <div class="card-body h-100">
                   <h5 class="card-title text-center"><?php echo $row[$x]['title']; ?></h5>
                   <h5 class="card-title"><?php echo $row[$x]['recipe_text'];?></h5>
+                  <form method="post" action="delete_Library.php" id ='formId'>
+                     <input type="hidden" id ="myField" name="foo"  value="<?php echo $row[$x]['id'];?>" />
+                 
 
+                     <p><a href="#" id ="delete" class="btn btn-warning" onclick="testMethod('<?php echo $x;?>')" data-value= "<?php echo $x;?>"><i class="fas fa-trash-alt"></i></a> Delete From library</p>
+                  </form>
                 </div>
               </div>
             </div>
@@ -68,7 +74,16 @@
       </div>
     </div>
    
-  
+  <script>
+  function testMethod(value){
+
+    var x = value;
+   var sel = document.querySelectorAll("#formId");
+   sel[x].submit();
+    
+  }
+    
+  </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
