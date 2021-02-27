@@ -1,9 +1,10 @@
 <?php
 session_start();
 $error = "username or password incorrect!";
+$loggedin ="true";
 $email = $_POST['email'];
 $password= $_POST['password'];
-$db = mysqli_connect("localhost","root","","Food");
+$db = mysqli_connect("mariadb","cs431s15","ahShut3I","cs431s15");
 
 if(mysqli_connect_errno()){
     
@@ -11,7 +12,8 @@ if(mysqli_connect_errno()){
     Please try again later.</p>";
     exit;
 }
-$query = "SELECT * FROM user WHERE Email='".$email ." ' and Password = '".$password. "'";
+$encryptpasswd = sha1($password);
+$query = "SELECT * FROM user WHERE Email='".$email ." ' and Password = '".$encryptpasswd. "'";
 $result = mysqli_query($db,$query);
 
 $row = mysqli_num_rows($result);
@@ -22,6 +24,7 @@ if($row==0){
     header('location:signin.php');
 
 }else{
+    $_SESSION["loggedin"] = $loggedin;
     $_SESSION["UserId"] = $Returnvalue["UserId"];
     header('location:../index.php');
 }

@@ -6,7 +6,7 @@ session_start();
 
          $recipeId = $_POST["foo"];
          echo "<div> RecipeId: ". $recipeId. "</div>";
-          @$db = new mysqli("localhost","root","","Food");
+          @$db = new mysqli("mariadb","cs431s15","ahShut3I","cs431s15");
 
           if(mysqli_connect_errno()) {
 

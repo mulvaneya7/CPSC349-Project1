@@ -5,7 +5,7 @@ if(isset($_POST['submit'])) {
     //$target = "images/".basename($_FILES['image']['name']);
 
     //connect to database
-    $db = mysqli_connect("localhost", "root", "", "Food");
+    $db = mysqli_connect("mariadb","cs431s15","ahShut3I","cs431s15");
 
     //get all the submitted data from the form
     $image = $_FILES['image']['name'];
@@ -23,7 +23,7 @@ if(isset($_POST['submit'])) {
         $imageNameNew = uniqid('',true).".".$imageActualExt;
         $imageDestination = 'images/'.$imageNameNew; 
         //store the submitted data into the database
-        $sql = "INSERT INTO recipe_cards (image, title, recipe_text) VALUES ('$imageNameNew', '$title', '$recipe')";
+        $sql = "INSERT INTO recipe_cards (image, title, recipe_text) VALUES ('$imageDestination', '$title', '$recipe')";
         mysqli_query($db, $sql);
         //header("Location: index.php");
 
